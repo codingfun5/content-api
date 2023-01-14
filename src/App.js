@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import { Component } from 'react';
+
+class App extends Component {
+  state = {
+    content: null,
+    author: null,
+    image: null
+  }
+ async componentDidMount() {
+const urlContent = "https://api.quotable.io/random";
+const urlFox =  "https://randomfox.ca/floof/";
+const responseContent = await fetch(urlContent);
+const responseFox = await fetch(urlFox);
+const dataContent = await responseContent.json();
+const dataFox = await responseFox.json();
+this.setState({content:dataContent.content, author:dataContent.author, image:dataFox.image})
+console.log(dataContent.content, dataContent.author, dataFox.image)
+  }
+  render() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <div>
+        <img className='fox' src={this.state.image}  width="400px" height="500px" alt="fox" />
+        <p className='parContent'>{this.state.content}</p>
+        <p className='parAuthor'>{this.state.author}</p>
+        
+        </div>
+    
   );
 }
-
+}
 export default App;
