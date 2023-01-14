@@ -16,7 +16,7 @@ const responseFox = await fetch(urlFox);
 const dataContent = await responseContent.json();
 const dataFox = await responseFox.json();
 this.setState({content:dataContent.content, author:dataContent.author, image:dataFox.image})
-console.log(dataContent.content, dataContent.author, dataFox.image)
+
   }
   render() {
   return (
